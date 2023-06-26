@@ -3,15 +3,16 @@ package com.example.zadanieDomowe;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class Currency {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "Id waluty", type = "long")
     private Long id;
 
@@ -25,9 +26,12 @@ public class Currency {
     private int days;
 
     @Schema(description = "Czas, w którym zostało wysłane zapytanie", type="LocalDateTime")
-    private LocalDateTime time;
+    private LocalDate time;
 
-    public Currency(Long id, String name, double averagerate, int days, LocalDateTime time) {
+    public Currency() {
+    }
+
+    public Currency(Long id, String name, double averagerate, int days, LocalDate time) {
         this.id = id;
         this.name = name;
         this.averagerate = averagerate;
@@ -67,11 +71,11 @@ public class Currency {
         this.days = days;
     }
 
-    public LocalDateTime getTime() {
+    public LocalDate getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalDate time) {
         this.time = time;
     }
 }
